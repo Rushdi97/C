@@ -1,0 +1,17 @@
+CC = gcc
+CFLAGS = -Wall -Og
+
+PROGS = p6\
+	p6.so\
+	
+# Do nothing
+all: $(PROGS)
+
+p6: p6.c
+		$(CC) $(CFLAGS) -rdynamic -o p6 p6.c -ldl
+		
+p6.so: p6timestamp.c
+		$(CC) $(CFLAGS) -shared -fpic -o p6.so p6timestamp.c
+		
+clean:
+		rm -f $(PROGS) *.o *~ *.d *.so *.a *.s
